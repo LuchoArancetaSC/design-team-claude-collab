@@ -1,0 +1,25 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm create *)",
+      "Bash(npx create-vite@latest . --template react --force)",
+      "Bash(npx create-vite@latest --template react --name sc-academy-dsp)",
+      "Bash(mv /Users/luchoaranceta/Desktop/sc-academy-dsp/vite-project/* /Users/luchoaranceta/Desktop/sc-academy-dsp/)",
+      "Bash(mv /Users/luchoaranceta/Desktop/sc-academy-dsp/vite-project/.* /Users/luchoaranceta/Desktop/sc-academy-dsp/)",
+      "Bash(rmdir /Users/luchoaranceta/Desktop/sc-academy-dsp/vite-project)",
+      "Bash(npm install *)",
+      "Bash(npm run *)",
+      "Bash(curl -s http://localhost:5173)",
+      "Bash(open *)",
+      "Bash(curl *)",
+      "mcp__figma__whoami",
+      "mcp__figma__generate_diagram",
+      "mcp__figma__use_figma",
+      "Bash(npx vite *)",
+      "mcp__figma__get_metadata",
+      "mcp__figma__generate_figma_design",
+      "mcp__figma__get_screenshot",
+      "mcp__figma__search_design_system"
+    ]
+  }
+}
