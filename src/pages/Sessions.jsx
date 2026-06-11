@@ -1,14 +1,12 @@
 import { useState } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 import {
-  CalendarDays, Clock, MapPin, ChevronsUpDown, FileText, ArrowRight,
-  ChevronDown, ChevronUp, X, Plus, Link2, Copy, Check, UserMinus, UserPlus,
+  ChevronsUpDown, Copy, Check, UserMinus, UserPlus,
+  ChevronDown, ChevronUp,
 } from 'lucide-react'
 import PageHeader from '../components/PageHeader'
-import Badge from '../components/Badge'
-import SessionTypeBadge from '../components/SessionTypeBadge'
 import { sessions } from '../data'
-import bannerSessions from '../assets/banner-sessions.svg'
+import iconSC from '../assets/icon-sc.svg'
 
 const TODAY_DATE = '22 Apr 2026'
 
@@ -23,86 +21,137 @@ function getInitials(name) {
 }
 
 function SortIcon() {
-  return <ChevronsUpDown size={12} color="var(--color-muted)" />
+  return (
+    <ChevronsUpDown size={12} color="#032f4f" style={{ flexShrink: 0 }} />
+  )
+}
+
+function TypeBadge({ type }) {
+  return (
+    <div style={{
+      border: '1px solid #032f4f',
+      borderRadius: 6,
+      padding: '2px 10px',
+      display: 'inline-flex',
+      alignItems: 'center',
+      flexShrink: 0,
+    }}>
+      <span style={{
+        fontFamily: 'Poppins, sans-serif',
+        fontWeight: 600,
+        fontSize: 12,
+        color: '#032f4f',
+        whiteSpace: 'nowrap',
+      }}>
+        {type}
+      </span>
+    </div>
+  )
+}
+
+function StatusBadge({ status }) {
+  const isConfirmed = status === 'Confirmed'
+  const borderColor = isConfirmed ? 'rgba(237,108,0,0.55)' : '#e4e4e7'
+  const textColor   = isConfirmed ? '#22af4d' : '#71717a'
+  return (
+    <div style={{
+      border: `1px solid ${borderColor}`,
+      borderRadius: 6,
+      padding: '2px 10px',
+      display: 'inline-flex',
+      alignItems: 'center',
+      flexShrink: 0,
+    }}>
+      <span style={{
+        fontFamily: 'Poppins, sans-serif',
+        fontWeight: 600,
+        fontSize: 12,
+        color: textColor,
+        whiteSpace: 'nowrap',
+      }}>
+        {status}
+      </span>
+    </div>
+  )
+}
+
+function LocationCell({ location, link }) {
+  const [copied, setCopied] = useState(false)
+  const copyLink = () => {
+    if (!link) return
+    navigator.clipboard.writeText(link).catch(() => {})
+    setCopied(true)
+    setTimeout(() => setCopied(false), 2000)
+  }
+  return (
+    <button
+      onClick={copyLink}
+      style={{
+        display: 'inline-flex',
+        alignItems: 'center',
+        gap: 4,
+        background: 'none',
+        border: 'none',
+        cursor: link ? 'pointer' : 'default',
+        padding: '2px 0',
+      }}
+    >
+      {copied ? <Check size={14} color="#032f4f" /> : <Copy size={14} color="#032f4f" />}
+      <span style={{
+        fontFamily: 'Poppins, sans-serif',
+        fontWeight: 500,
+        fontSize: 12,
+        color: '#032f4f',
+      }}>
+        {location}
+      </span>
+    </button>
+  )
 }
 
 /* ── Expanded learner-management panel ──────────────────────────── */
 function ExpandedPanel({ session, learners, onRemove, onEnrolClick, colSpan }) {
-  const [copied, setCopied] = useState(false)
-
-  const copyLink = () => {
-    if (!session.link) return
-    navigator.clipboard.writeText(session.link).catch(() => {})
-    setCopied(true)
-    setTimeout(() => setCopied(false), 2000)
-  }
-
   return (
     <tr>
-      <td
-        colSpan={colSpan}
-        style={{ padding: 0, background: '#f8f9fa', borderBottom: '1px solid var(--color-border)' }}
-      >
+      <td colSpan={colSpan} style={{ padding: 0, background: '#f8f9fa', borderBottom: '1px solid #e4e4e7' }}>
         <div style={{
           display: 'grid',
           gridTemplateColumns: '240px 1fr',
-          gap: 0,
           borderTop: '1px solid #eaeaec',
         }}>
-
-          {/* Left: session quick info */}
+          {/* Left: quick info */}
           <div style={{
             padding: '16px 20px',
             borderRight: '1px solid #eaeaec',
             display: 'flex', flexDirection: 'column', gap: 10,
           }}>
-            <div style={{ fontSize: 11, fontWeight: 700, color: 'var(--color-muted)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+            <div style={{ fontSize: 11, fontWeight: 700, color: '#71717a', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
               Quick Info
             </div>
-
             {session.module && (
               <div>
-                <div style={{ fontSize: 11, color: 'var(--color-muted)', marginBottom: 2 }}>Module</div>
-                <div style={{ fontSize: 13, fontWeight: 500, color: 'var(--color-text)' }}>{session.module}</div>
+                <div style={{ fontSize: 11, color: '#71717a', marginBottom: 2 }}>Module</div>
+                <div style={{ fontSize: 13, fontWeight: 500, color: '#032f4f' }}>{session.module}</div>
               </div>
             )}
-
             <div>
-              <div style={{ fontSize: 11, color: 'var(--color-muted)', marginBottom: 2 }}>Trainer</div>
-              <div style={{ fontSize: 13, fontWeight: 500, color: session.trainer ? 'var(--color-text)' : 'var(--color-muted)' }}>
+              <div style={{ fontSize: 11, color: '#71717a', marginBottom: 2 }}>Trainer</div>
+              <div style={{ fontSize: 13, fontWeight: 500, color: session.trainer ? '#032f4f' : '#71717a' }}>
                 {session.trainer ?? <span style={{ fontStyle: 'italic' }}>Unassigned</span>}
               </div>
             </div>
-
-            {session.link ? (
-              <div>
-                <div style={{ fontSize: 11, color: 'var(--color-muted)', marginBottom: 4 }}>Join Link</div>
-                <button
-                  className="btn btn-outline btn-sm"
-                  style={{ gap: 4, fontSize: 11 }}
-                  onClick={copyLink}
-                >
-                  {copied ? <><Check size={11} /> Copied!</> : <><Copy size={11} /> Copy link</>}
-                </button>
-              </div>
-            ) : (
-              <div>
-                <div style={{ fontSize: 11, color: 'var(--color-muted)', marginBottom: 2 }}>Link</div>
-                <div style={{ fontSize: 12, color: 'var(--color-muted)', fontStyle: 'italic' }}>Not assigned yet</div>
-              </div>
-            )}
           </div>
 
           {/* Right: learner management */}
           <div style={{ padding: '16px 20px' }}>
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 12 }}>
-              <div style={{ fontSize: 11, fontWeight: 700, color: 'var(--color-muted)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+              <div style={{ fontSize: 11, fontWeight: 700, color: '#71717a', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
                 Enrolled Learners
               </div>
               <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
                 <span style={{
                   fontSize: 11, fontWeight: 700,
-                  background: '#e4e4e7', color: 'var(--color-muted)',
+                  background: '#e4e4e7', color: '#71717a',
                   padding: '1px 8px', borderRadius: 99,
                 }}>
                   {learners.length}
@@ -116,19 +165,15 @@ function ExpandedPanel({ session, learners, onRemove, onEnrolClick, colSpan }) {
                 </button>
               </div>
             </div>
-
-            {/* Learner list */}
             {learners.length === 0 ? (
-              <div style={{ fontSize: 13, color: 'var(--color-muted)', fontStyle: 'italic' }}>
-                No learners enrolled yet.
-              </div>
+              <div style={{ fontSize: 13, color: '#71717a', fontStyle: 'italic' }}>No learners enrolled yet.</div>
             ) : (
               <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
                 {learners.map((l, i) => (
                   <div key={l.id} style={{
                     display: 'flex', alignItems: 'center', gap: 10,
                     padding: '5px 8px', borderRadius: 6,
-                    background: 'white', border: '1px solid var(--color-border)',
+                    background: 'white', border: '1px solid #e4e4e7',
                   }}>
                     <div style={{
                       width: 24, height: 24, borderRadius: '50%', flexShrink: 0,
@@ -139,16 +184,15 @@ function ExpandedPanel({ session, learners, onRemove, onEnrolClick, colSpan }) {
                       {getInitials(l.name)}
                     </div>
                     <div style={{ flex: 1, minWidth: 0 }}>
-                      <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--color-text)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{l.name}</div>
-                      <div style={{ fontSize: 11, color: 'var(--color-muted)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{l.email}</div>
+                      <div style={{ fontSize: 12, fontWeight: 600, color: '#09090b', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{l.name}</div>
+                      <div style={{ fontSize: 11, color: '#71717a', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{l.email}</div>
                     </div>
                     <button
                       onClick={() => onRemove(l.id)}
                       style={{
                         background: 'none', border: 'none', cursor: 'pointer',
-                        color: 'var(--color-muted)', padding: '2px 4px',
-                        borderRadius: 4, display: 'flex', alignItems: 'center',
-                        flexShrink: 0,
+                        color: '#71717a', padding: '2px 4px',
+                        borderRadius: 4, display: 'flex', alignItems: 'center', flexShrink: 0,
                       }}
                       title="Remove learner"
                     >
@@ -159,10 +203,191 @@ function ExpandedPanel({ session, learners, onRemove, onEnrolClick, colSpan }) {
               </div>
             )}
           </div>
-
         </div>
       </td>
     </tr>
+  )
+}
+
+/* ── Styled table ─────────────────────────────────────────────────── */
+function SessionTable({ rows, navigate, sessionBase, learnersBase, localLearners, setLocalLearners, expandedId, setExpandedId, showResults }) {
+  const toggleExpand = id => setExpandedId(prev => prev === id ? null : id)
+  const removeLearner = (sid, lid) =>
+    setLocalLearners(prev => ({ ...prev, [sid]: prev[sid].filter(l => l.id !== lid) }))
+
+  const thStyle = {
+    fontFamily: 'Poppins, sans-serif',
+    fontWeight: 500,
+    fontSize: 14,
+    color: '#032f4f',
+    padding: '0 8px',
+    height: 38,
+    textAlign: 'left',
+    whiteSpace: 'nowrap',
+    background: 'transparent',
+    border: 'none',
+  }
+
+  const colSpan = showResults ? 7 : 6
+
+  return (
+    <div style={{
+      border: '1px solid #e4e4e7',
+      borderRadius: 6,
+      overflow: 'hidden',
+      width: '100%',
+    }}>
+      <table style={{ width: '100%', borderCollapse: 'collapse' }}>
+        <thead>
+          <tr style={{ borderBottom: '1px solid #e4e4e7' }}>
+            <th style={{ ...thStyle, width: 140 }}>Type</th>
+            <th style={{ ...thStyle }}>Session Name</th>
+            <th style={{ ...thStyle, width: 130 }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+                Status <SortIcon />
+              </div>
+            </th>
+            <th style={{ ...thStyle, width: 160 }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+                Date &amp; Time <SortIcon />
+              </div>
+            </th>
+            <th style={{ ...thStyle, width: 140 }}>Location</th>
+            <th style={{ ...thStyle, width: 160 }}>Trainer / Learners</th>
+            {showResults && <th style={{ ...thStyle, width: 120 }}>Results</th>}
+            <th style={{ ...thStyle, width: 110 }}>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {rows.map((session, i) => {
+            const isExpanded = expandedId === session.id
+            const learners   = localLearners[session.id] ?? []
+            const isAlt = i % 2 === 1
+            const rowBg     = isAlt ? '#f5f5f5' : 'white'
+            const rowBorder = isAlt ? '#e6e7ea' : '#e4e4e7'
+
+            return (
+              <>
+                <tr
+                  key={session.id}
+                  style={{
+                    background: isExpanded ? '#f8f9fa' : rowBg,
+                    borderLeft: `1px solid ${rowBorder}`,
+                    borderRight: `1px solid ${rowBorder}`,
+                    cursor: 'pointer',
+                  }}
+                  onClick={() => showResults ? navigate(`${sessionBase}/${session.id}`) : toggleExpand(session.id)}
+                >
+                  {/* Type */}
+                  <td style={{ height: 64, padding: '8px' }}>
+                    <TypeBadge type={session.type} />
+                  </td>
+                  {/* Session Name */}
+                  <td style={{ padding: '8px' }}>
+                    <span style={{ fontFamily: 'Poppins, sans-serif', fontWeight: 600, fontSize: 13, color: '#09090b' }}>
+                      {session.name}
+                    </span>
+                  </td>
+                  {/* Status */}
+                  <td style={{ padding: '8px' }}>
+                    <StatusBadge status={session.status} />
+                  </td>
+                  {/* Date & Time */}
+                  <td style={{ padding: '8px' }}>
+                    <div style={{ fontFamily: 'Poppins, sans-serif', fontWeight: 500, fontSize: 13, color: '#09090b', lineHeight: '20px' }}>
+                      {session.date}
+                    </div>
+                    <div style={{ fontFamily: 'Poppins, sans-serif', fontWeight: 400, fontSize: 11, color: '#71717a', lineHeight: '18px' }}>
+                      {session.time}
+                    </div>
+                  </td>
+                  {/* Location */}
+                  <td style={{ padding: '8px' }}>
+                    <LocationCell location={session.location} link={session.link} />
+                  </td>
+                  {/* Trainer / Learners */}
+                  <td style={{ padding: '8px' }}>
+                    <div style={{ fontFamily: 'Poppins, sans-serif', fontSize: 12, color: '#3f3f46', fontWeight: 500 }}>
+                      {session.trainer
+                        ? session.trainer
+                        : <span style={{ color: '#71717a', fontStyle: 'italic' }}>Unassigned</span>
+                      }
+                    </div>
+                    <div style={{ fontFamily: 'Poppins, sans-serif', fontSize: 11, color: '#71717a', marginTop: 2 }}>
+                      {learners.length} learner{learners.length !== 1 ? 's' : ''}
+                    </div>
+                  </td>
+                  {/* Results (past sessions) */}
+                  {showResults && (
+                    <td style={{ padding: '8px' }} onClick={e => e.stopPropagation()}>
+                      <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap' }}>
+                        {session.learners?.map(l => (
+                          <div key={l.id} style={{
+                            border: '1px solid rgba(237,108,0,0.55)',
+                            borderRadius: 6,
+                            padding: '2px 8px',
+                            fontSize: 11,
+                            fontWeight: 600,
+                            color: l.result?.toLowerCase() === 'pass' ? '#22af4d' : '#ef4444',
+                            fontFamily: 'Poppins, sans-serif',
+                          }}>
+                            {l.result}
+                          </div>
+                        ))}
+                      </div>
+                    </td>
+                  )}
+                  {/* Actions */}
+                  <td style={{ padding: '8px' }} onClick={e => e.stopPropagation()}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                      <button
+                        onClick={() => navigate(`${sessionBase}/${session.id}`)}
+                        style={{
+                          background: '#032f4f',
+                          color: 'white',
+                          border: 'none',
+                          borderRadius: 12,
+                          height: 24,
+                          padding: '0 10px',
+                          fontFamily: 'Inter, Poppins, sans-serif',
+                          fontWeight: 500,
+                          fontSize: 12,
+                          cursor: 'pointer',
+                          display: 'flex',
+                          alignItems: 'center',
+                          whiteSpace: 'nowrap',
+                        }}
+                      >
+                        Details →
+                      </button>
+                      {!showResults && (
+                        <div
+                          style={{ color: '#71717a', display: 'flex', alignItems: 'center', cursor: 'pointer' }}
+                          onClick={e => { e.stopPropagation(); toggleExpand(session.id) }}
+                        >
+                          {isExpanded ? <ChevronUp size={15} /> : <ChevronDown size={15} />}
+                        </div>
+                      )}
+                    </div>
+                  </td>
+                </tr>
+
+                {isExpanded && !showResults && (
+                  <ExpandedPanel
+                    key={`exp-${session.id}`}
+                    session={session}
+                    learners={learners}
+                    onRemove={lid => removeLearner(session.id, lid)}
+                    onEnrolClick={() => navigate(`${learnersBase}/enrol`, { state: { selectedSession: session } })}
+                    colSpan={colSpan}
+                  />
+                )}
+              </>
+            )
+          })}
+        </tbody>
+      </table>
+    </div>
   )
 }
 
@@ -173,201 +398,89 @@ export default function Sessions() {
   const sessionBase  = location.pathname.startsWith('/admin') ? '/admin/sessions' : '/sessions'
   const learnersBase = location.pathname.startsWith('/admin') ? '/admin/learners' : '/learners'
 
-  const [activeTab, setActiveTab]   = useState('upcoming')
+  const [activeTab, setActiveTab]   = useState(todaySessions.length > 0 ? 'today' : 'upcoming')
   const [expandedId, setExpandedId] = useState(null)
   const [localLearners, setLocalLearners] = useState(() =>
     Object.fromEntries(sessions.map(s => [s.id, (s.learners ?? []).map(l => ({ ...l }))]))
   )
 
-  const toggleExpand = id =>
-    setExpandedId(prev => prev === id ? null : id)
-
-  const removeLearner = (sid, lid) =>
-    setLocalLearners(prev => ({ ...prev, [sid]: prev[sid].filter(l => l.id !== lid) }))
-
-  /* ── Reusable active-session row ── */
-  const renderActiveRow = (session) => {
-    const isExpanded = expandedId === session.id
-    const learners   = localLearners[session.id] ?? []
-
-    return (
-      <>
-        <tr
-          key={session.id}
-          style={{ cursor: 'pointer', background: isExpanded ? '#f8f9fa' : undefined }}
-          onClick={() => toggleExpand(session.id)}
-        >
-          <td><SessionTypeBadge type={session.type} /></td>
-          <td>
-            <span style={{ fontWeight: 600, fontSize: 13 }}>{session.name}</span>
-          </td>
-          <td><Badge variant={session.status}>{session.status}</Badge></td>
-          <td>
-            <div style={{ fontSize: 13, fontWeight: 500 }}>{session.date}</div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 3, fontSize: 11, color: 'var(--color-muted)', marginTop: 2 }}>
-              <Clock size={11} /> {session.time}
-            </div>
-          </td>
-          <td>
-            <span style={{ display: 'flex', alignItems: 'center', gap: 4, fontSize: 13 }}>
-              <MapPin size={12} color="var(--color-muted)" /> {session.location}
-            </span>
-          </td>
-          <td>
-            <div style={{ fontSize: 12, color: 'var(--color-text-secondary)', fontWeight: 500 }}>
-              {session.trainer
-                ? `${session.trainer} / ${learners.length} learners`
-                : <span style={{ color: 'var(--color-muted)', fontStyle: 'italic' }}>Unassigned · {learners.length} learners</span>
-              }
-            </div>
-          </td>
-          <td onClick={e => e.stopPropagation()}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-              <button
-                className="btn btn-dark btn-sm btn-pill"
-                onClick={() => navigate(`${sessionBase}/${session.id}`)}
-              >
-                Details <ArrowRight size={12} />
-              </button>
-              <div style={{ color: 'var(--color-muted)', display: 'flex', alignItems: 'center' }}
-                onClick={e => { e.stopPropagation(); toggleExpand(session.id) }}
-              >
-                {isExpanded
-                  ? <ChevronUp size={15} style={{ cursor: 'pointer' }} />
-                  : <ChevronDown size={15} style={{ cursor: 'pointer' }} />
-                }
-              </div>
-            </div>
-          </td>
-        </tr>
-
-        {isExpanded && (
-          <ExpandedPanel
-            session={session}
-            learners={learners}
-            onRemove={lid => removeLearner(session.id, lid)}
-            onEnrolClick={() => navigate(`${learnersBase}/enrol`, { state: { selectedSession: session } })}
-            colSpan={7}
-          />
-        )}
-      </>
-    )
-  }
-
-  const upcomingHeaders = (
-    <tr>
-      <th>Type</th>
-      <th>Session Name</th>
-      <th><span className="th-sortable">Status <SortIcon /></span></th>
-      <th><span className="th-sortable">Date &amp; Time <SortIcon /></span></th>
-      <th>Location</th>
-      <th>Trainer / Learners</th>
-      <th>Actions</th>
-    </tr>
-  )
+  const sharedTableProps = { navigate, sessionBase, learnersBase, localLearners, setLocalLearners, expandedId, setExpandedId }
 
   return (
-    <div className="page-body">
-      <PageHeader title="Sessions" icon={<CalendarDays size={18} color="white" />} banner={bannerSessions} />
+    <div style={{ background: '#f6f8fc', minHeight: '100vh', padding: 0 }}>
+      {/* Banner */}
+      <PageHeader
+        title="Sessions"
+        icon={<img src={iconSC} alt="" style={{ width: 22, height: 22 }} />}
+        banner
+      />
 
-      <div style={{ marginBottom: 20 }}>
-        <div className="page-title">Training Sessions</div>
-        <div className="page-subtitle">Manage and track your learners' training schedule.</div>
-      </div>
+      <div style={{ padding: '0 24px 24px' }}>
 
-      {/* Tabs */}
-      <div className="tabs">
-        <button className={`tab-btn${activeTab === 'today'    ? ' active' : ''}`} onClick={() => setActiveTab('today')}>Today</button>
-        <button className={`tab-btn${activeTab === 'upcoming' ? ' active' : ''}`} onClick={() => setActiveTab('upcoming')}>Upcoming Sessions</button>
-        <button className={`tab-btn${activeTab === 'past'     ? ' active' : ''}`} onClick={() => setActiveTab('past')}>Past Sessions</button>
-      </div>
-
-      {/* Today */}
-      {activeTab === 'today' && (
-        <>
-          <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--color-muted)', marginBottom: 16 }}>
-            Wednesday, 22 Apr 2026 &mdash; {todaySessions.length} session{todaySessions.length !== 1 ? 's' : ''} today
-          </div>
-          <div className="table-wrapper">
-            <table>
-              <thead>{upcomingHeaders}</thead>
-              <tbody>{todaySessions.map(s => renderActiveRow(s))}</tbody>
-            </table>
-          </div>
-        </>
-      )}
-
-      {/* Upcoming */}
-      {activeTab === 'upcoming' && (
-        <div className="table-wrapper">
-          <table>
-            <thead>{upcomingHeaders}</thead>
-            <tbody>{upcomingSessions.map(s => renderActiveRow(s))}</tbody>
-          </table>
+        {/* Tabs */}
+        <div style={{
+          display: 'flex',
+          gap: 0,
+          borderBottom: '1px solid #e4e4e7',
+          marginBottom: 20,
+        }}>
+          {[
+            { id: 'today',    label: 'Today',             count: todaySessions.length },
+            { id: 'upcoming', label: 'Upcoming Sessions',  count: upcomingSessions.length },
+            { id: 'past',     label: 'Past Sessions',      count: pastSessions.length },
+          ].map(tab => (
+            <button
+              key={tab.id}
+              onClick={() => setActiveTab(tab.id)}
+              style={{
+                fontFamily: 'Poppins, sans-serif',
+                fontWeight: 600,
+                fontSize: 16,
+                color: activeTab === tab.id ? '#032f4f' : '#707078',
+                background: 'none',
+                border: 'none',
+                borderBottom: activeTab === tab.id ? '2px solid #032f4f' : '2px solid transparent',
+                padding: '12px 20px',
+                cursor: 'pointer',
+                whiteSpace: 'nowrap',
+                display: 'flex',
+                alignItems: 'center',
+                gap: 8,
+              }}
+            >
+              {tab.label}
+              <span style={{
+                background: activeTab === tab.id ? '#032f4f' : '#e4e4e7',
+                color: activeTab === tab.id ? 'white' : '#71717a',
+                borderRadius: 99,
+                fontSize: 11,
+                fontWeight: 700,
+                padding: '1px 7px',
+                lineHeight: '16px',
+              }}>
+                {tab.count}
+              </span>
+            </button>
+          ))}
         </div>
-      )}
 
-      {/* Past */}
-      {activeTab === 'past' && (
-        <div className="table-wrapper">
-          <table>
-            <thead>
-              <tr>
-                <th>Type</th>
-                <th>Session Name</th>
-                <th><span className="th-sortable">Date &amp; Time <SortIcon /></span></th>
-                <th>Location</th>
-                <th>Trainer / Learners</th>
-                <th>Results</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {pastSessions.map(session => (
-                <tr
-                  key={session.id}
-                  style={{ cursor: 'pointer' }}
-                  onClick={() => navigate(`${sessionBase}/${session.id}`)}
-                >
-                  <td><SessionTypeBadge type={session.type} /></td>
-                  <td><span style={{ fontWeight: 600, fontSize: 13 }}>{session.name}</span></td>
-                  <td>
-                    <div style={{ fontSize: 13, fontWeight: 500 }}>{session.date}</div>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: 3, fontSize: 11, color: 'var(--color-muted)', marginTop: 2 }}>
-                      <Clock size={11} /> {session.time}
-                    </div>
-                  </td>
-                  <td>
-                    <span style={{ display: 'flex', alignItems: 'center', gap: 4, fontSize: 13 }}>
-                      <MapPin size={12} color="var(--color-muted)" /> {session.location}
-                    </span>
-                  </td>
-                  <td>
-                    <div style={{ fontSize: 12, color: 'var(--color-text-secondary)', fontWeight: 500 }}>
-                      {session.trainer} / {session.learners.length} learners
-                    </div>
-                  </td>
-                  <td>
-                    <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap' }}>
-                      {session.learners.map(l => (
-                        <Badge key={l.id} variant={l.result?.toLowerCase()}>{l.result}</Badge>
-                      ))}
-                    </div>
-                  </td>
-                  <td onClick={e => e.stopPropagation()}>
-                    <button
-                      className="btn btn-outline btn-sm"
-                      onClick={() => navigate(`${sessionBase}/${session.id}`)}
-                    >
-                      <FileText size={12} /> View Report
-                    </button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      )}
+        {/* Today */}
+        {activeTab === 'today' && (
+          todaySessions.length === 0
+            ? <p style={{ fontFamily: 'Poppins, sans-serif', color: '#71717a', fontSize: 14, fontStyle: 'italic' }}>No sessions today.</p>
+            : <SessionTable rows={todaySessions} showResults={false} {...sharedTableProps} />
+        )}
+
+        {/* Upcoming */}
+        {activeTab === 'upcoming' && (
+          <SessionTable rows={upcomingSessions} showResults={false} {...sharedTableProps} />
+        )}
+
+        {/* Past */}
+        {activeTab === 'past' && (
+          <SessionTable rows={pastSessions} showResults={true} {...sharedTableProps} />
+        )}
+      </div>
     </div>
   )
 }

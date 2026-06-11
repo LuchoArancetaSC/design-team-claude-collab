@@ -4,6 +4,7 @@ import Sidebar from './components/Sidebar'
 import Dashboard from './pages/Dashboard'
 import Sessions from './pages/Sessions'
 import SessionDetail from './pages/SessionDetail'
+import SessionManage from './pages/SessionManage'
 import Invoices from './pages/Invoices'
 import AdminLayout from './layouts/AdminLayout'
 import AdminDashboard from './pages/admin/AdminDashboard'
@@ -43,6 +44,7 @@ export default function App() {
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/sessions" element={<Sessions />} />
           <Route path="/sessions/:id" element={<SessionDetail />} />
+          <Route path="/sessions/:id/manage" element={<SessionManage />} />
           <Route path="/learners" element={<Learners />} />
           <Route path="/learners/enrol" element={<EnrolLearners />} />
           <Route path="/learners/:id" element={<LearnerDetail />} />
