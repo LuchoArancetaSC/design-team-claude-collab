@@ -3,7 +3,7 @@ import {
   Zap, ChevronLeft, ChevronRight,
   LayoutDashboard, Building2, BookOpen, CalendarDays, Users, FileText, BarChart2,
 } from 'lucide-react'
-import RoleSwitcher from './RoleSwitcher'
+import VerticalRoleSwitcher from './VerticalRoleSwitcher'
 import logoSC from '../assets/logo-sc.svg'
 
 export default function AdminSidebar({ collapsed, onToggle }) {
@@ -37,37 +37,37 @@ export default function AdminSidebar({ collapsed, onToggle }) {
       <nav className="sidebar-nav">
         {!collapsed && <div className="nav-section-label">ADMIN</div>}
 
-        <NavLink to="/admin" end className={({ isActive }) => `nav-item${isActive ? ' active' : ''}`}>
+        <NavLink to="/academy/admin" end className={({ isActive }) => `nav-item${isActive ? ' active' : ''}`}>
           <span className="nav-icon"><LayoutDashboard size={16} /></span>
           {!collapsed && <span className="nav-text">Dashboard</span>}
         </NavLink>
 
-        <NavLink to="/admin/tenants" className={({ isActive }) => `nav-item${isActive ? ' active' : ''}`}>
+        <NavLink to="/academy/admin/tenants" className={({ isActive }) => `nav-item${isActive ? ' active' : ''}`}>
           <span className="nav-icon"><Building2 size={16} /></span>
           {!collapsed && <span className="nav-text">Tenants &amp; Sub-Orgs</span>}
         </NavLink>
 
-        <NavLink to="/admin/paths" className={({ isActive }) => `nav-item${isActive ? ' active' : ''}`}>
+        <NavLink to="/academy/admin/paths" className={({ isActive }) => `nav-item${isActive ? ' active' : ''}`}>
           <span className="nav-icon"><BookOpen size={16} /></span>
           {!collapsed && <span className="nav-text">Learning Paths</span>}
         </NavLink>
 
-        <NavLink to="/admin/sessions" className={({ isActive }) => `nav-item${isActive ? ' active' : ''}`}>
+        <NavLink to="/academy/admin/sessions" className={({ isActive }) => `nav-item${isActive ? ' active' : ''}`}>
           <span className="nav-icon"><CalendarDays size={16} /></span>
           {!collapsed && <span className="nav-text">Sessions</span>}
         </NavLink>
 
-        <NavLink to="/admin/learners" className={({ isActive }) => `nav-item${isActive ? ' active' : ''}`}>
+        <NavLink to="/academy/admin/learners" className={({ isActive }) => `nav-item${isActive ? ' active' : ''}`}>
           <span className="nav-icon"><Users size={16} /></span>
           {!collapsed && <span className="nav-text">Learners</span>}
         </NavLink>
 
-        <NavLink to="/admin/invoices" className={({ isActive }) => `nav-item${isActive ? ' active' : ''}`}>
+        <NavLink to="/academy/admin/invoices" className={({ isActive }) => `nav-item${isActive ? ' active' : ''}`}>
           <span className="nav-icon"><FileText size={16} /></span>
           {!collapsed && <span className="nav-text">Invoices</span>}
         </NavLink>
 
-        <NavLink to="/admin/reports" className={({ isActive }) => `nav-item${isActive ? ' active' : ''}`}>
+        <NavLink to="/academy/admin/reports" className={({ isActive }) => `nav-item${isActive ? ' active' : ''}`}>
           <span className="nav-icon"><BarChart2 size={16} /></span>
           {!collapsed && <span className="nav-text">Reports</span>}
         </NavLink>
@@ -75,7 +75,7 @@ export default function AdminSidebar({ collapsed, onToggle }) {
 
       {/* Footer */}
       <div className="sidebar-footer">
-        <RoleSwitcher collapsed={collapsed} initials="LG" />
+        <VerticalRoleSwitcher collapsed={collapsed} initials="LG" />
       </div>
     </aside>
   )

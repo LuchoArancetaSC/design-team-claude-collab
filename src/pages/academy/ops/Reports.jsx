@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom'
 import { BarChart2, ChevronLeft, TrendingUp, Users, Award, FileText } from 'lucide-react'
-import PageHeader from '../../components/PageHeader'
+import PageHeader from '../../../components/PageHeader'
 
 const COMING_SOON = [
   { icon: TrendingUp, label: 'Completion Rate Report',    desc: 'Track path completion % across all sub-orgs and date ranges.' },
@@ -16,7 +16,7 @@ export default function Reports() {
     <div className="page-body">
       <PageHeader title="Reports" icon={<BarChart2 size={18} color="white" />} banner />
 
-      <button className="back-link" onClick={() => navigate('/admin')}>
+      <button className="back-link" onClick={() => navigate('/academy/admin')}>
         <ChevronLeft size={15} /> Back to Dashboard
       </button>
 
@@ -52,7 +52,7 @@ export default function Reports() {
         <div style={{ fontSize: 13, color: 'var(--color-muted)', maxWidth: 380, lineHeight: 1.65, marginBottom: 24 }}>
           The reporting module is under development. Below you can see which reports will be available.
         </div>
-        <button className="btn btn-outline btn-sm" onClick={() => navigate('/admin')}>
+        <button className="btn btn-outline btn-sm" onClick={() => navigate('/academy/admin')}>
           <ChevronLeft size={13} /> Back to Dashboard
         </button>
       </div>

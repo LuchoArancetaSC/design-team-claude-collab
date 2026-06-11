@@ -85,12 +85,12 @@ export default function PageHeader({ title, icon, banner }) {
   /* ── Inline banner — same visual language, dynamic title + icon ── */
   if (banner) {
     return (
-      <div className="page-banner" style={{ position: 'relative', padding: 0, overflow: 'hidden' }}>
+      <div className="page-banner" style={{ position: 'relative', overflow: 'hidden' }}>
         <BannerBg />
         <div style={{
-          position: 'relative', zIndex: 1,
+          position: 'relative', zIndex: 1, flex: 1,
           display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-          padding: '0 28px', height: '100%',
+          height: '100%',
         }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
             <div style={{ display: 'flex', alignItems: 'center', color: 'white' }}>{icon}</div>

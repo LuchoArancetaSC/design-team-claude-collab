@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Building2, ChevronLeft } from 'lucide-react'
-import PageHeader from '../../components/PageHeader'
+import PageHeader from '../../../components/PageHeader'
 
 const AVAILABLE_PATHS = ['Safety IT All', 'Information IT', 'Onboarding Basics']
 
@@ -18,14 +18,14 @@ export default function NewSubOrg() {
   const canSubmit = form.name.trim() && form.email.trim()
 
   const handleSubmit = () => {
-    navigate('/admin/tenants')
+    navigate('/academy/admin/tenants')
   }
 
   return (
     <div className="page-body">
       <PageHeader title="New Sub-Organisation" icon={<Building2 size={18} color="white" />} banner />
 
-      <button className="back-link" onClick={() => navigate('/admin/tenants')}>
+      <button className="back-link" onClick={() => navigate('/academy/admin/tenants')}>
         <ChevronLeft size={15} /> Tenants & Sub-Orgs
       </button>
 
@@ -83,7 +83,7 @@ export default function NewSubOrg() {
           display: 'flex', gap: 10, justifyContent: 'flex-end',
           marginTop: 24, paddingTop: 20, borderTop: '1px solid var(--color-border)',
         }}>
-          <button className="btn btn-outline" onClick={() => navigate('/admin/tenants')}>Cancel</button>
+          <button className="btn btn-outline" onClick={() => navigate('/academy/admin/tenants')}>Cancel</button>
           <button
             className="btn btn-dark"
             disabled={!canSubmit}

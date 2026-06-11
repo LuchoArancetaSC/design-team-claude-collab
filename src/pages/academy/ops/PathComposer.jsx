@@ -4,7 +4,7 @@ import {
   ChevronLeft, ChevronDown, GripVertical, Plus, Search, Pencil, Award, Upload,
   X, Check, Trash2, FileText,
 } from 'lucide-react'
-import Badge from '../../components/Badge'
+import Badge from '../../../components/Badge'
 
 /* ── Mock data ────────────────────────────────────────────────────── */
 const INITIAL_ACT_NAMES = ['Welcome aboard', 'On the Road', 'Final Assessment']
@@ -517,7 +517,7 @@ export default function PathComposer() {
         flexWrap: 'wrap', gap: 12,
       }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap' }}>
-          <button className="back-link" style={{ marginBottom: 0 }} onClick={() => navigate('/admin/paths')}>
+          <button className="back-link" style={{ marginBottom: 0 }} onClick={() => navigate('/academy/admin/paths')}>
             <ChevronLeft size={14} /> Learning Paths
           </button>
           <span style={{ color: 'var(--color-muted)', fontSize: 13 }}>/</span>

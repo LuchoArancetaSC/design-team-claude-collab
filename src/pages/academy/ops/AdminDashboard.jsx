@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom'
 import { LayoutDashboard, Users, BookOpen, TrendingUp, AlertTriangle, CalendarDays, Receipt, ArrowRight } from 'lucide-react'
-import PageHeader from '../../components/PageHeader'
-import Badge from '../../components/Badge'
+import PageHeader from '../../../components/PageHeader'
+import Badge from '../../../components/Badge'
 
 const PATHS = [
   { id: 1, name: 'Safety IT All Module',    org: 'Amazon DSP España',  enrolled: 48, total: 52, completion: 92, status: 'published' },
@@ -41,7 +41,7 @@ const QUICK_ACCESS = [
     color: 'var(--color-secondary)',
     subtitle: 'Ver y gestionar todas las sesiones',
     btnLabel: 'Abrir Sessions',
-    path: '/admin/sessions',
+    path: '/academy/admin/sessions',
   },
   {
     label: 'LMS',
@@ -49,7 +49,7 @@ const QUICK_ACCESS = [
     color: 'var(--color-primary)',
     subtitle: 'Paths, microlessons y contenido',
     btnLabel: 'Abrir LMS',
-    path: '/admin/paths',
+    path: '/academy/admin/paths',
   },
   {
     label: 'Invoicing',
@@ -57,7 +57,7 @@ const QUICK_ACCESS = [
     color: '#7c3aed',
     subtitle: 'Facturas y pagos pendientes',
     btnLabel: 'Abrir Invoicing',
-    path: '/admin/invoices',
+    path: '/academy/admin/invoices',
   },
 ]
 

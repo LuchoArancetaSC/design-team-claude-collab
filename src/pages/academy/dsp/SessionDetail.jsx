@@ -2,14 +2,14 @@ import { useState } from 'react'
 import { useParams, useNavigate, useLocation } from 'react-router-dom'
 import {
   CalendarDays, ChevronLeft, Clock, MapPin, Link2, Download,
-  Trash2, Shield, Check, Plus, Award, Info,
+  Trash2, Shield, Check, Plus, Award, Info, X,
   Smartphone, Copy, RefreshCw,
 } from 'lucide-react'
-import PageHeader from '../components/PageHeader'
-import Badge from '../components/Badge'
-import SessionTypeBadge from '../components/SessionTypeBadge'
-import { sessions, certificates } from '../data'
-import bannerSessions from '../assets/banner-sessions.svg'
+import PageHeader from '../../../components/PageHeader'
+import Badge from '../../../components/Badge'
+import SessionTypeBadge from '../../../components/SessionTypeBadge'
+import { sessions, certificates } from '../../../data'
+import bannerSessions from '../../../assets/banner-sessions.svg'
 
 const AVATAR_COLORS = ['#1d4ed8','#7c3aed','#059669','#d97706','#dc2626','#0891b2','#9333ea','#16a34a']
 
@@ -232,9 +232,9 @@ export default function SessionDetail() {
   const { id } = useParams()
   const navigate = useNavigate()
   const location = useLocation()
-  const sessionsBase = location.pathname.startsWith('/admin') ? '/admin/sessions' : '/sessions'
+  const sessionsBase = location.pathname.startsWith('/academy/admin') ? '/academy/admin/sessions' : '/academy/sessions'
 
-  const learnersBase = location.pathname.startsWith('/admin') ? '/admin/learners' : '/learners'
+  const learnersBase = location.pathname.startsWith('/academy/admin') ? '/academy/admin/learners' : '/academy/learners'
 
   const [sessionData, setSessionData] = useState(() => {
     const found = sessions.find(s => s.id === id)

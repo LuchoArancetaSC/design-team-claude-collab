@@ -1,8 +1,8 @@
 import { useNavigate, useParams, useLocation } from 'react-router-dom'
 import { Users, ChevronLeft, Award, Download, ShieldOff, Mail, Building2 } from 'lucide-react'
-import PageHeader from '../../components/PageHeader'
-import Badge from '../../components/Badge'
-import { adminLearners, certificates } from '../../data'
+import PageHeader from '../../../components/PageHeader'
+import Badge from '../../../components/Badge'
+import { adminLearners, certificates } from '../../../data'
 
 const AVATAR_COLORS = ['#1d4ed8', '#7c3aed', '#059669', '#d97706', '#dc2626']
 
@@ -34,7 +34,7 @@ export default function LearnerDetail() {
   const navigate = useNavigate()
   const { id } = useParams()
   const location = useLocation()
-  const learnersBase = location.pathname.startsWith('/admin') ? '/admin/learners' : '/learners'
+  const learnersBase = location.pathname.startsWith('/academy/admin') ? '/academy/admin/learners' : '/academy/learners'
 
   const learner = adminLearners.find(l => String(l.id) === String(id))
 

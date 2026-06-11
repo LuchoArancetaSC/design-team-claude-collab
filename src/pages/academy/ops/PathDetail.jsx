@@ -1,8 +1,8 @@
 import { useNavigate, useParams } from 'react-router-dom'
 import { BookOpen, ChevronLeft, Edit2, Users, CheckCircle2, Clock } from 'lucide-react'
-import PageHeader from '../../components/PageHeader'
-import Badge from '../../components/Badge'
-import { adminPaths, adminLearners } from '../../data'
+import PageHeader from '../../../components/PageHeader'
+import Badge from '../../../components/Badge'
+import { adminPaths, adminLearners } from '../../../data'
 
 const AVATAR_COLORS = ['#1d4ed8', '#7c3aed', '#059669', '#d97706', '#dc2626']
 
@@ -36,7 +36,7 @@ export default function PathDetail() {
     return (
       <div className="page-body">
         <PageHeader title="Learning Paths" icon={<BookOpen size={18} color="white" />} banner />
-        <button className="back-link" onClick={() => navigate('/admin/paths')}>
+        <button className="back-link" onClick={() => navigate('/academy/admin/paths')}>
           <ChevronLeft size={15} /> Learning Paths
         </button>
         <div style={{ textAlign: 'center', padding: '64px 24px', color: 'var(--color-muted)', fontSize: 14 }}>
@@ -52,7 +52,7 @@ export default function PathDetail() {
     <div className="page-body">
       <PageHeader title="Learning Paths" icon={<BookOpen size={18} color="white" />} banner />
 
-      <button className="back-link" onClick={() => navigate('/admin/paths')}>
+      <button className="back-link" onClick={() => navigate('/academy/admin/paths')}>
         <ChevronLeft size={15} /> Learning Paths
       </button>
 

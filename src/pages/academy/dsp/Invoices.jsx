@@ -1,9 +1,9 @@
 import { useState } from 'react'
 import { FileText, Download, CreditCard, Landmark, CheckCircle2, Check, ChevronsUpDown } from 'lucide-react'
-import PageHeader from '../components/PageHeader'
-import Badge from '../components/Badge'
-import Modal from '../components/Modal'
-import { invoices } from '../data'
+import PageHeader from '../../../components/PageHeader'
+import Badge from '../../../components/Badge'
+import Modal from '../../../components/Modal'
+import { invoices } from '../../../data'
 
 const CLIENT_META = {
   'DSP / Courier':   { initials: 'DSP', bg: '#09090b', color: '#fff' },

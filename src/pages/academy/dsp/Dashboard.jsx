@@ -4,8 +4,8 @@ import {
   Home, CheckCircle2, CalendarDays, ArrowRight,
   Check, X, Search, Upload, CreditCard, Landmark, Shield, Clock,
 } from 'lucide-react'
-import PageHeader from '../components/PageHeader'
-import Modal from '../components/Modal'
+import PageHeader from '../../../components/PageHeader'
+import Modal from '../../../components/Modal'
 
 const AVATAR_COLORS = ['#1d4ed8','#7c3aed','#059669','#d97706','#dc2626','#0891b2','#9333ea','#16a34a']
 

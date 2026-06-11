@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom'
 import { Building2, Plus, Edit2, Eye, FileText } from 'lucide-react'
-import PageHeader from '../../components/PageHeader'
-import Badge from '../../components/Badge'
+import PageHeader from '../../../components/PageHeader'
+import Badge from '../../../components/Badge'
 
 export default function Tenants() {
   const navigate = useNavigate()
@@ -40,10 +40,10 @@ export default function Tenants() {
             </div>
           </div>
           <div style={{ display: 'flex', gap: 8 }}>
-            <button className="btn btn-ghost btn-sm" style={{ gap: 4 }} onClick={() => navigate('/admin/invoices')}>
+            <button className="btn btn-ghost btn-sm" style={{ gap: 4 }} onClick={() => navigate('/academy/admin/invoices')}>
               <FileText size={13} /> Invoices
             </button>
-            <button className="btn btn-outline btn-sm" onClick={() => navigate('/admin/tenants/1')}>
+            <button className="btn btn-outline btn-sm" onClick={() => navigate('/academy/admin/tenants/1')}>
               Manage Tenant
             </button>
           </div>
@@ -53,7 +53,7 @@ export default function Tenants() {
       {/* Sub-Orgs section */}
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 12 }}>
         <div className="section-title">Sub-Organisations</div>
-        <button className="btn btn-dark btn-sm" onClick={() => navigate('/admin/tenants/new')}>
+        <button className="btn btn-dark btn-sm" onClick={() => navigate('/academy/admin/tenants/new')}>
           <Plus size={13} /> New Sub-Org
         </button>
       </div>
@@ -95,7 +95,7 @@ export default function Tenants() {
                   <button
                     className="btn btn-ghost btn-icon"
                     title="View"
-                    onClick={() => navigate('/admin/tenants/1')}
+                    onClick={() => navigate('/academy/admin/tenants/1')}
                   >
                     <Eye size={14} />
                   </button>

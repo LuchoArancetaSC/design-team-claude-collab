@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { BookOpen, ChevronLeft, Plus } from 'lucide-react'
-import PageHeader from '../../components/PageHeader'
+import PageHeader from '../../../components/PageHeader'
 
 export default function NewPath() {
   const navigate = useNavigate()
@@ -16,14 +16,14 @@ export default function NewPath() {
   const canSubmit = form.name.trim().length > 0
 
   const handleSubmit = () => {
-    navigate('/admin/paths/new/edit', { state: { pathForm: form } })
+    navigate('/academy/admin/paths/new/edit', { state: { pathForm: form } })
   }
 
   return (
     <div className="page-body">
       <PageHeader title="New Learning Path" icon={<BookOpen size={18} color="white" />} banner />
 
-      <button className="back-link" onClick={() => navigate('/admin/paths')}>
+      <button className="back-link" onClick={() => navigate('/academy/admin/paths')}>
         <ChevronLeft size={15} /> Learning Paths
       </button>
 
@@ -100,7 +100,7 @@ export default function NewPath() {
           display: 'flex', gap: 10, justifyContent: 'flex-end',
           marginTop: 24, paddingTop: 20, borderTop: '1px solid var(--color-border)',
         }}>
-          <button className="btn btn-outline" onClick={() => navigate('/admin/paths')}>Cancel</button>
+          <button className="btn btn-outline" onClick={() => navigate('/academy/admin/paths')}>Cancel</button>
           <button
             className="btn btn-dark"
             disabled={!canSubmit}

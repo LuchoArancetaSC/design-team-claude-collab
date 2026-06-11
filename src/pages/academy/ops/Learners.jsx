@@ -1,9 +1,9 @@
 import { useState } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 import { Users, UserPlus, Award, Download, ShieldOff } from 'lucide-react'
-import PageHeader from '../../components/PageHeader'
-import Badge from '../../components/Badge'
-import { adminLearners, certificates } from '../../data'
+import PageHeader from '../../../components/PageHeader'
+import Badge from '../../../components/Badge'
+import { adminLearners, certificates } from '../../../data'
 
 const ACCOUNT_LABEL = { active: 'Active', invited: 'Invited', registered: 'Registered', stalled: 'Stalled' }
 const PATH_LABEL    = { completed: 'Completed', inprogress: 'In Progress', stalled: 'Stalled', draft: 'Assigned', fail: 'Failed' }
@@ -98,7 +98,7 @@ function CertificatesTable() {
 export default function Learners() {
   const navigate = useNavigate()
   const location = useLocation()
-  const learnersBase = location.pathname.startsWith('/admin') ? '/admin/learners' : '/learners'
+  const learnersBase = location.pathname.startsWith('/academy/admin') ? '/academy/admin/learners' : '/academy/learners'
 
   const [activeTab, setActiveTab]       = useState('learners')
   const [search, setSearch]             = useState('')

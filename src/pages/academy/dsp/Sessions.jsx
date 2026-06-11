@@ -4,11 +4,11 @@ import {
   CalendarDays, Clock, MapPin, ChevronsUpDown, FileText, ArrowRight,
   ChevronDown, ChevronUp, X, Plus, Link2, Copy, Check, UserMinus, UserPlus,
 } from 'lucide-react'
-import PageHeader from '../components/PageHeader'
-import Badge from '../components/Badge'
-import SessionTypeBadge from '../components/SessionTypeBadge'
-import { sessions } from '../data'
-import bannerSessions from '../assets/banner-sessions.svg'
+import PageHeader from '../../../components/PageHeader'
+import Badge from '../../../components/Badge'
+import SessionTypeBadge from '../../../components/SessionTypeBadge'
+import { sessions } from '../../../data'
+import bannerSessions from '../../../assets/banner-sessions.svg'
 
 const TODAY_DATE = '22 Apr 2026'
 
@@ -170,8 +170,8 @@ function ExpandedPanel({ session, learners, onRemove, onEnrolClick, colSpan }) {
 export default function Sessions() {
   const navigate  = useNavigate()
   const location  = useLocation()
-  const sessionBase  = location.pathname.startsWith('/admin') ? '/admin/sessions' : '/sessions'
-  const learnersBase = location.pathname.startsWith('/admin') ? '/admin/learners' : '/learners'
+  const sessionBase  = location.pathname.startsWith('/academy/admin') ? '/academy/admin/sessions' : '/academy/sessions'
+  const learnersBase = location.pathname.startsWith('/academy/admin') ? '/academy/admin/learners' : '/academy/learners'
 
   const [activeTab, setActiveTab]   = useState('upcoming')
   const [expandedId, setExpandedId] = useState(null)

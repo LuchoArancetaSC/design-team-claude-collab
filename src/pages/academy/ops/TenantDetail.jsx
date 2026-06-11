@@ -4,9 +4,9 @@ import {
   Building2, ChevronLeft, Users, BookOpen, CalendarDays, FileText,
   Edit2, Mail, ExternalLink, Download, Plus,
 } from 'lucide-react'
-import PageHeader from '../../components/PageHeader'
-import Badge from '../../components/Badge'
-import { adminLearners, adminPaths, sessions, invoices } from '../../data'
+import PageHeader from '../../../components/PageHeader'
+import Badge from '../../../components/Badge'
+import { adminLearners, adminPaths, sessions, invoices } from '../../../data'
 
 const AVATAR_COLORS = ['#1d4ed8', '#7c3aed', '#059669', '#d97706', '#dc2626']
 function getInitials(name) {
@@ -64,7 +64,7 @@ export default function TenantDetail() {
     <div className="page-body">
       <PageHeader title="Tenants & Sub-Orgs" icon={<Building2 size={18} color="white" />} banner />
 
-      <button className="back-link" onClick={() => navigate('/admin/tenants')}>
+      <button className="back-link" onClick={() => navigate('/academy/admin/tenants')}>
         <ChevronLeft size={15} /> Tenants & Sub-Orgs
       </button>
 
@@ -146,7 +146,7 @@ export default function TenantDetail() {
         <div>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12 }}>
             <div className="section-title">{orgLearners.length} Learners</div>
-            <button className="btn btn-dark btn-sm" onClick={() => navigate('/admin/learners/enrol')}>
+            <button className="btn btn-dark btn-sm" onClick={() => navigate('/academy/admin/learners/enrol')}>
               <Plus size={13} /> Enrol Learners
             </button>
           </div>
@@ -196,7 +196,7 @@ export default function TenantDetail() {
         <div>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12 }}>
             <div className="section-title">{orgPaths.length} Learning Paths</div>
-            <button className="btn btn-dark btn-sm" onClick={() => navigate('/admin/paths/new')}>
+            <button className="btn btn-dark btn-sm" onClick={() => navigate('/academy/admin/paths/new')}>
               <Plus size={13} /> New Path
             </button>
           </div>
@@ -278,7 +278,7 @@ export default function TenantDetail() {
             <button
               className="btn btn-outline btn-sm"
               style={{ gap: 4 }}
-              onClick={() => navigate('/admin/invoices')}
+              onClick={() => navigate('/academy/admin/invoices')}
             >
               <ExternalLink size={13} /> View all invoices
             </button>

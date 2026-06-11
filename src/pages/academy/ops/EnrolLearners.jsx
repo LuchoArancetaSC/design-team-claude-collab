@@ -4,10 +4,10 @@ import {
   Users, UserPlus, ChevronLeft, X, Upload, Link2, Copy, Check,
   CalendarDays, MapPin, Clock, ArrowRight,
 } from 'lucide-react'
-import PageHeader from '../../components/PageHeader'
-import Badge from '../../components/Badge'
-import SessionTypeBadge from '../../components/SessionTypeBadge'
-import { sessions } from '../../data'
+import PageHeader from '../../../components/PageHeader'
+import Badge from '../../../components/Badge'
+import SessionTypeBadge from '../../../components/SessionTypeBadge'
+import { sessions } from '../../../data'
 
 const availableSessions = sessions.filter(s => s.status !== 'Past')
 
@@ -56,8 +56,8 @@ function StepIndicator({ step }) {
 export default function EnrolLearners() {
   const navigate = useNavigate()
   const location = useLocation()
-  const learnersBase  = location.pathname.startsWith('/admin') ? '/admin/learners' : '/learners'
-  const sessionsBase  = location.pathname.startsWith('/admin') ? '/admin/sessions' : '/sessions'
+  const learnersBase  = location.pathname.startsWith('/academy/admin') ? '/academy/admin/learners' : '/academy/learners'
+  const sessionsBase  = location.pathname.startsWith('/academy/admin') ? '/academy/admin/sessions' : '/academy/sessions'
 
   // Pre-selected session when coming from the Sessions section
   const preSession    = location.state?.selectedSession ?? null

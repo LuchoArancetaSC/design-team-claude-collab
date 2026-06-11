@@ -3,9 +3,9 @@ import { useNavigate } from 'react-router-dom'
 import {
   FileText, Download, ChevronsUpDown, Building2, ExternalLink,
 } from 'lucide-react'
-import PageHeader from '../../components/PageHeader'
-import Badge from '../../components/Badge'
-import { invoices } from '../../data'
+import PageHeader from '../../../components/PageHeader'
+import Badge from '../../../components/Badge'
+import { invoices } from '../../../data'
 
 const MONTHS = { Jan:0, Feb:1, Mar:2, Apr:3, May:4, Jun:5, Jul:6, Aug:7, Sep:8, Oct:9, Nov:10, Dec:11 }
 function parseDMY(str) {
@@ -223,7 +223,7 @@ export default function AdminInvoices() {
                       <button
                         className="btn btn-ghost btn-icon"
                         title="Go to sub-org"
-                        onClick={() => navigate('/admin/tenants/1')}
+                        onClick={() => navigate('/academy/admin/tenants/1')}
                       >
                         <ExternalLink size={14} />
                       </button>

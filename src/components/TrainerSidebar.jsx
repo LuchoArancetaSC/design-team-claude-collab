@@ -1,12 +1,11 @@
 import { NavLink } from 'react-router-dom'
-import { Home, CalendarDays, FileText, Users, Zap, ChevronLeft, ChevronRight } from 'lucide-react'
+import { Home, CalendarDays, Calendar, Zap, ChevronLeft, ChevronRight } from 'lucide-react'
 import VerticalRoleSwitcher from './VerticalRoleSwitcher'
 import logoSC from '../assets/logo-sc.svg'
 
-export default function Sidebar({ collapsed, onToggle }) {
+export default function TrainerSidebar({ collapsed, onToggle }) {
   return (
     <aside className={`sidebar${collapsed ? ' collapsed' : ''}`}>
-      {/* Header */}
       <div className="sidebar-header">
         {!collapsed && (
           <>
@@ -30,35 +29,27 @@ export default function Sidebar({ collapsed, onToggle }) {
         )}
       </div>
 
-      {/* Nav */}
       <nav className="sidebar-nav">
-        {!collapsed && <div className="nav-section-label">Menu</div>}
+        {!collapsed && <div className="nav-section-label">Trainer</div>}
 
-        <NavLink to="/academy/" className={({ isActive }) => `nav-item${isActive ? ' active' : ''}`}>
+        <NavLink to="/academy/trainer" end className={({ isActive }) => `nav-item${isActive ? ' active' : ''}`}>
           <span className="nav-icon"><Home size={16} /></span>
-          {!collapsed && <span className="nav-text">Home</span>}
+          {!collapsed && <span className="nav-text">Trainer Hub</span>}
         </NavLink>
 
-        <NavLink to="/academy/sessions" className={({ isActive }) => `nav-item${isActive ? ' active' : ''}`}>
+        <NavLink to="/academy/trainer/sessions" className={({ isActive }) => `nav-item${isActive ? ' active' : ''}`}>
           <span className="nav-icon"><CalendarDays size={16} /></span>
           {!collapsed && <span className="nav-text">Sessions</span>}
-          <span className="nav-dot" />
         </NavLink>
 
-        <NavLink to="/academy/learners" className={({ isActive }) => `nav-item${isActive ? ' active' : ''}`}>
-          <span className="nav-icon"><Users size={16} /></span>
-          {!collapsed && <span className="nav-text">Learners</span>}
-        </NavLink>
-
-        <NavLink to="/academy/invoices" className={({ isActive }) => `nav-item${isActive ? ' active' : ''}`}>
-          <span className="nav-icon"><FileText size={16} /></span>
-          {!collapsed && <span className="nav-text">Invoices</span>}
+        <NavLink to="/academy/trainer/calendar" className={({ isActive }) => `nav-item${isActive ? ' active' : ''}`}>
+          <span className="nav-icon"><Calendar size={16} /></span>
+          {!collapsed && <span className="nav-text">Calendar</span>}
         </NavLink>
       </nav>
 
-      {/* Footer */}
       <div className="sidebar-footer">
-        <VerticalRoleSwitcher collapsed={collapsed} initials="AM" />
+        <VerticalRoleSwitcher collapsed={collapsed} initials="JD" />
       </div>
     </aside>
   )

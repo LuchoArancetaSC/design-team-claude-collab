@@ -1,9 +1,9 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { BookOpen, Plus, Edit2, Eye, ChevronsUpDown } from 'lucide-react'
-import PageHeader from '../../components/PageHeader'
-import Badge from '../../components/Badge'
-import { adminPaths } from '../../data'
+import PageHeader from '../../../components/PageHeader'
+import Badge from '../../../components/Badge'
+import { adminPaths } from '../../../data'
 
 const STATUS_LABEL = {
   published:  'Published',
@@ -50,7 +50,7 @@ export default function LearningPaths() {
           <div className="page-title">Learning Paths</div>
           <div className="page-subtitle">Build and manage training paths for your learners.</div>
         </div>
-        <button className="btn btn-dark btn-sm" onClick={() => navigate('/admin/paths/new')}>
+        <button className="btn btn-dark btn-sm" onClick={() => navigate('/academy/admin/paths/new')}>
           <Plus size={13} /> New Path
         </button>
       </div>
