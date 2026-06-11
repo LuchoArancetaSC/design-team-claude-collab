@@ -44,11 +44,11 @@ function detectVertical(pathname) {
 }
 
 function detectRole(pathname) {
-  if (pathname.includes('/admin'))   return 'ops'
-  if (pathname.includes('/trainer')) return 'trainer'
-  if (pathname.includes('/learner')) return 'learner'
-  if (pathname.includes('/driver'))  return 'driver'
-  if (pathname.includes('/employee')) return 'employee'
+  if (pathname.includes('/admin'))          return 'ops'
+  if (pathname.includes('/trainer'))        return 'trainer'
+  if (/\/learner(\/|$)/.test(pathname))     return 'learner'
+  if (pathname.includes('/driver'))         return 'driver'
+  if (pathname.includes('/employee'))       return 'employee'
   return 'dsp'
 }
 
