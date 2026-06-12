@@ -58,6 +58,9 @@ import TrainerLayout    from './layouts/TrainerLayout'
 import TrainerDashboard from './pages/academy/trainer/TrainerDashboard'
 import TrainerCalendar  from './pages/academy/trainer/TrainerCalendar'
 
+import DriverHome      from './pages/jobs/user/DriverHome'
+import DriverJobDetail from './pages/jobs/user/DriverJobDetail'
+
 function RequireAuth({ children }) {
   if (!sessionStorage.getItem('sc_auth')) {
     return <Navigate to="/login" replace />
@@ -134,7 +137,7 @@ export default function App() {
           <Route path="sessions" element={<Sessions />} />
         </Route>
 
-        {/* ── Jobs DSP ── */}
+        {/* ── Jobs DSP + Driver ── */}
         <Route path="/jobs" element={<DSPLayout />}>
           <Route index element={<RecruitmentHub />} />
           <Route path="candidates/:id" element={<CandidateProfile />} />
@@ -143,6 +146,8 @@ export default function App() {
           <Route path="billing" element={<JobsBilling />} />
           <Route path="billing/plans" element={<AvailablePlans />} />
           <Route path="profile" element={<CompanyProfile />} />
+          <Route path="driver" element={<DriverHome />} />
+          <Route path="driver/jobs/:id" element={<DriverJobDetail />} />
         </Route>
 
         {/* ── Jobs Admin ── */}

@@ -1,6 +1,6 @@
 import { NavLink, useLocation } from 'react-router-dom'
 import {
-  Home, CalendarDays, FileText, Users, Zap, ChevronLeft, ChevronRight,
+  Home, CalendarDays, Calendar, FileText, Users, Zap, ChevronLeft, ChevronRight,
   CreditCard, HelpCircle, List, Building2,
 } from 'lucide-react'
 import VerticalRoleSwitcher from './VerticalRoleSwitcher'
@@ -55,6 +55,26 @@ function PerksNav({ collapsed }) {
   )
 }
 
+function DriverNav({ collapsed }) {
+  return (
+    <>
+      {!collapsed && <div className="nav-section-label">Jobs · Driver</div>}
+      <NavLink to="/jobs/driver" end className={({ isActive }) => `nav-item${isActive ? ' active' : ''}`}>
+        <span className="nav-icon"><Home size={16} /></span>
+        {!collapsed && <span className="nav-text">Home</span>}
+      </NavLink>
+      <span className="nav-item" style={{ opacity: 0.4, cursor: 'default' }}>
+        <span className="nav-icon"><CalendarDays size={16} /></span>
+        {!collapsed && <span className="nav-text">Sessions</span>}
+      </span>
+      <span className="nav-item" style={{ opacity: 0.4, cursor: 'default' }}>
+        <span className="nav-icon"><Calendar size={16} /></span>
+        {!collapsed && <span className="nav-text">Calendar</span>}
+      </span>
+    </>
+  )
+}
+
 function JobsNav({ collapsed }) {
   return (
     <>
@@ -81,13 +101,15 @@ function JobsNav({ collapsed }) {
 
 export default function Sidebar({ collapsed, onToggle }) {
   const { pathname } = useLocation()
-  const isPerks = pathname.startsWith('/perks') && !pathname.startsWith('/perks/admin')
-  const isJobs  = pathname.startsWith('/jobs')  && !pathname.startsWith('/jobs/admin')
+  const isPerks  = pathname.startsWith('/perks')       && !pathname.startsWith('/perks/admin')
+  const isDriver = pathname.startsWith('/jobs/driver')
+  const isJobs   = pathname.startsWith('/jobs')         && !pathname.startsWith('/jobs/admin')
 
   function activeNav() {
-    if (isPerks) return <PerksNav collapsed={collapsed} />
-    if (isJobs)  return <JobsNav  collapsed={collapsed} />
-    return              <AcademyNav collapsed={collapsed} />
+    if (isPerks)  return <PerksNav  collapsed={collapsed} />
+    if (isDriver) return <DriverNav collapsed={collapsed} />
+    if (isJobs)   return <JobsNav   collapsed={collapsed} />
+    return               <AcademyNav collapsed={collapsed} />
   }
 
   return (
