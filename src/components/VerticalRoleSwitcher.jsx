@@ -21,9 +21,8 @@ const ROLES = {
     { id: 'driver', label: 'Driver' },
   ],
   perks: [
-    { id: 'dsp',      label: 'DSP / Company' },
-    { id: 'ops',      label: 'Ops SC' },
-    { id: 'employee', label: 'Employee' },
+    { id: 'dsp', label: 'DSP / Company' },
+    { id: 'ops', label: 'Ops SC' },
   ],
 }
 

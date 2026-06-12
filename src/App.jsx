@@ -24,9 +24,35 @@ import PathComposer   from './pages/academy/ops/PathComposer'
 import Reports        from './pages/academy/ops/Reports'
 import TenantDetail   from './pages/academy/ops/TenantDetail'
 import AdminInvoices  from './pages/academy/ops/AdminInvoices'
+import SMP           from './pages/academy/ops/SMP'
+import Cohorts       from './pages/academy/ops/Cohorts'
 
-import JobsDashboard    from './pages/jobs/dsp/JobsDashboard'
+import RecruitmentHub   from './pages/jobs/dsp/RecruitmentHub'
+import CandidateProfile from './pages/jobs/dsp/CandidateProfile'
+import JobListings      from './pages/jobs/dsp/JobListings'
+import JobEditor        from './pages/jobs/dsp/JobEditor'
+import JobsBilling      from './pages/jobs/dsp/JobsBilling'
+import AvailablePlans   from './pages/jobs/dsp/AvailablePlans'
+import CompanyProfile   from './pages/jobs/dsp/CompanyProfile'
+
+import JobsAdminDashboard from './pages/jobs/ops/JobsAdminDashboard'
+import AllCandidates    from './pages/jobs/ops/AllCandidates'
+import AllJobs          from './pages/jobs/ops/AllJobs'
+import HSMQueue         from './pages/jobs/ops/HSMQueue'
+import FunnelAnalytics  from './pages/jobs/ops/FunnelAnalytics'
+import ClientManagement from './pages/jobs/ops/ClientManagement'
+
 import PerksDashboard   from './pages/perks/dsp/PerksDashboard'
+import Employees        from './pages/perks/dsp/Employees'
+import EmployeeDetail   from './pages/perks/dsp/EmployeeDetail'
+import Billing          from './pages/perks/dsp/Billing'
+import Help             from './pages/perks/dsp/Help'
+
+import PerksAdminDashboard from './pages/perks/ops/PerksAdminDashboard'
+import Deals            from './pages/perks/ops/Deals'
+import DealDetail       from './pages/perks/ops/DealDetail'
+import Employers        from './pages/perks/ops/Employers'
+import PerksAnalytics   from './pages/perks/ops/PerksAnalytics'
 
 import TrainerLayout    from './layouts/TrainerLayout'
 import TrainerDashboard from './pages/academy/trainer/TrainerDashboard'
@@ -85,6 +111,9 @@ export default function App() {
 
           <Route path="invoices" element={<AdminInvoices />} />
 
+          <Route path="smp" element={<SMP />} />
+          <Route path="cohorts" element={<Cohorts />} />
+
           <Route path="learners" element={<Learners />} />
           <Route path="learners/enrol" element={<EnrolLearners />} />
           <Route path="learners/:id" element={<LearnerDetail />} />
@@ -105,14 +134,43 @@ export default function App() {
           <Route path="sessions" element={<Sessions />} />
         </Route>
 
-        {/* ── Jobs ── */}
+        {/* ── Jobs DSP ── */}
         <Route path="/jobs" element={<DSPLayout />}>
-          <Route index element={<JobsDashboard />} />
+          <Route index element={<RecruitmentHub />} />
+          <Route path="candidates/:id" element={<CandidateProfile />} />
+          <Route path="listings" element={<JobListings />} />
+          <Route path="listings/:id" element={<JobEditor />} />
+          <Route path="billing" element={<JobsBilling />} />
+          <Route path="billing/plans" element={<AvailablePlans />} />
+          <Route path="profile" element={<CompanyProfile />} />
         </Route>
 
-        {/* ── Perks ── */}
+        {/* ── Jobs Admin ── */}
+        <Route path="/jobs/admin" element={<AdminLayout />}>
+          <Route index element={<JobsAdminDashboard />} />
+          <Route path="candidates" element={<AllCandidates />} />
+          <Route path="jobs" element={<AllJobs />} />
+          <Route path="hsm" element={<HSMQueue />} />
+          <Route path="analytics" element={<FunnelAnalytics />} />
+          <Route path="clients" element={<ClientManagement />} />
+        </Route>
+
+        {/* ── Perks DSP ── */}
         <Route path="/perks" element={<DSPLayout />}>
           <Route index element={<PerksDashboard />} />
+          <Route path="employees" element={<Employees />} />
+          <Route path="employees/:id" element={<EmployeeDetail />} />
+          <Route path="billing" element={<Billing />} />
+          <Route path="help" element={<Help />} />
+        </Route>
+
+        {/* ── Perks Admin ── */}
+        <Route path="/perks/admin" element={<AdminLayout />}>
+          <Route index element={<PerksAdminDashboard />} />
+          <Route path="deals" element={<Deals />} />
+          <Route path="deals/:id" element={<DealDetail />} />
+          <Route path="employers" element={<Employers />} />
+          <Route path="analytics" element={<PerksAnalytics />} />
         </Route>
 
         {/* ── Fallback ── */}

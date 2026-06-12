@@ -2260,3 +2260,163 @@ tbody tr:last-child td { border-bottom: none; }
 .cal-rule-row {
   gap: 10px;
 }
+
+/* ── SMP & Cohorts ──────────────────────────────────────────────── */
+.smp-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.smp-btn-active {
+  background: rgba(79,70,229,0.08) !important;
+  border-color: rgba(79,70,229,0.4) !important;
+  color: #4f46e5 !important;
+}
+
+.smp-panel {
+  background: white;
+  border: 1.5px solid var(--color-border);
+  border-radius: 14px;
+  padding: 20px 22px;
+  margin-bottom: 20px;
+}
+
+.smp-panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.smp-panel-desc {
+  font-size: 13px;
+  color: var(--color-muted);
+  margin-bottom: 12px;
+  line-height: 1.55;
+}
+
+.smp-dropzone {
+  border: 2px dashed var(--color-border);
+  border-radius: 12px;
+  padding: 36px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s;
+}
+.smp-dropzone:hover,
+.smp-dropzone--over {
+  border-color: #4f46e5;
+  background: rgba(79,70,229,0.03);
+}
+
+.smp-drop-hint {
+  font-size: 13px;
+  color: var(--color-muted);
+  margin-top: 10px;
+  text-align: center;
+}
+.smp-drop-sub {
+  font-size: 11px;
+  color: #a1a1aa;
+  margin-top: 4px;
+}
+
+.smp-email-textarea {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1.5px solid var(--color-border);
+  border-radius: 10px;
+  font-family: 'Inter', monospace;
+  font-size: 12px;
+  color: var(--color-text);
+  resize: vertical;
+  outline: none;
+  transition: border-color 0.15s;
+  line-height: 1.7;
+}
+.smp-email-textarea:focus { border-color: #4f46e5; }
+
+.smp-badge-pending {
+  border: 1px solid #a1a1aa;
+  color: #71717a;
+}
+
+.smp-pills-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.smp-pill {
+  background: #f4f4f5;
+  border: 1px solid #e4e4e7;
+  border-radius: 8px;
+  padding: 4px 10px;
+  font-size: 12px;
+  color: var(--color-text);
+}
+
+/* Cohorts-specific */
+.cohort-invite-panel {
+  border-color: rgba(79,70,229,0.35);
+  margin-bottom: 20px;
+}
+
+.cohort-link-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+.cohort-link-code {
+  flex: 1;
+  background: #f4f4f5;
+  border: 1.5px solid #e4e4e7;
+  border-radius: 9px;
+  padding: 8px 12px;
+  font-size: 12px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-family: 'Inter', monospace;
+}
+
+.cohort-roster-ready {
+  font-size: 11px;
+  color: #16a34a;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-weight: 500;
+}
+
+.cohort-progress-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.cohort-progress-bar {
+  flex: 1;
+  background: #e4e4e7;
+  border-radius: 99px;
+  height: 6px;
+  min-width: 80px;
+}
+.cohort-progress-fill {
+  background: #16a34a;
+  border-radius: 99px;
+  height: 6px;
+}
+.cohort-progress-pct {
+  font-size: 12px;
+  font-weight: 600;
+  color: #16a34a;
+  min-width: 34px;
+}

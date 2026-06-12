@@ -6,7 +6,7 @@ const PRODUCTS = [
   {
     id: 'academy',
     name: 'Academy',
-    desc: 'Formación, learning paths y gestión de sesiones para tus conductores.',
+    desc: 'Training, learning paths and session management for your drivers.',
     icon: GraduationCap,
     active: true,
     path: '/academy',
@@ -14,16 +14,18 @@ const PRODUCTS = [
   {
     id: 'jobs',
     name: 'Jobs',
-    desc: 'Bolsa de trabajo y gestión de candidatos para tu flota de conductores.',
+    desc: 'Job board and candidate management for your driver fleet.',
     icon: Briefcase,
-    active: false,
+    active: true,
+    path: '/jobs',
   },
   {
     id: 'perks',
     name: 'Perks',
-    desc: 'Beneficios y ventajas exclusivas para los empleados de tu empresa.',
+    desc: 'Exclusive benefits and perks for your company employees.',
     icon: Gift,
-    active: false,
+    active: true,
+    path: '/perks',
   },
 ]
 
@@ -34,8 +36,8 @@ export default function ProductSelector() {
     <div className="product-selector">
       <div className="product-selector-header">
         <img src={logoSc} alt="Service Club" className="product-selector-logo" />
-        <div className="product-selector-title">Bienvenido al SC Marketplace</div>
-        <div className="product-selector-subtitle">Selecciona el producto al que quieres acceder</div>
+        <div className="product-selector-title">Welcome to SC Marketplace</div>
+        <div className="product-selector-subtitle">Select the product you want to access</div>
       </div>
 
       <div className="product-selector-grid">
@@ -56,7 +58,7 @@ export default function ProductSelector() {
               <div className="product-card-desc">{product.desc}</div>
 
               {product.active
-                ? <button className="btn btn-dark btn-sm" onClick={e => { e.stopPropagation(); navigate(product.path) }}>Abrir {product.name}</button>
+                ? <button className="btn btn-dark btn-sm" onClick={e => { e.stopPropagation(); navigate(product.path) }}>Open {product.name}</button>
                 : <span className="badge badge-gray">Coming soon</span>
               }
             </div>
